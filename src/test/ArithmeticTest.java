@@ -1,3 +1,5 @@
+package test;
+
 import com.clouway.stringsum.Arithmetic;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,9 +1,8 @@
-package test;
+package com.clouway.stringsum;
 
-import com.clouway.stringsum.Arithmetic;
+
 import org.junit.Before;
 import org.junit.Test;
-
 import static junit.framework.TestCase.assertEquals;
 
 
@@ -28,7 +27,7 @@ public class ArithmeticTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void addNewLineThrowsNullPointerException() {
-    double result = calculator.add("\n");
+     calculator.add("\n");
   }
 
   @Test(expected = NullPointerException.class)

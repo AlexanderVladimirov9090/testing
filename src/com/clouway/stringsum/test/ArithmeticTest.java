@@ -21,95 +21,58 @@ public class ArithmeticTest {
   }
 
   @Test(expected = NullPointerException.class)
-  public void testAddEmptyStringThrowsNullPointerException() {
+  public void addEmptyStringThrowsNullPointerException() {
     calculator.add("");
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testAddNewLineThrowsNullPointerException() {
+  public void addNewLineThrowsNullPointerException() {
     double result = calculator.add("\n");
   }
 
   @Test(expected = NullPointerException.class)
-  public void testAddOnlyTextThrowsNullPointerException() {
+  public void addOnlyTextThrowsNullPointerException() {
     calculator.add("asdfsadf");
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testAddFrontNewLineTextOnlyReturnZero() {
+  public void addFrontNewLineTextOnlyReturnZero() {
     calculator.add("\n asdf");
   }
 
   @Test
-  public void testAddOneNumberReturnItself() {
+  public void addOneNumberReturnItself() {
     double result = calculator.add("1");
     assertEquals(1, result, 0);
   }
 
   @Test
-  public void testAddTwoNumbersReturnSum() {
+  public void addTwoNumbersReturnSum() {
     double result = calculator.add("1 2");
     assertEquals(3, result, 0);
   }
 
   @Test
-  public void testAddFrontTextNumbersReturnSumOfNumbers() {
+  public void addFrontTextNumbersReturnSumOfNumbers() {
     double result = calculator.add("a 1 3 asd 4");
     assertEquals(8, result, 0);
   }
 
   @Test
-  public void testAddNumbersMidTextReturnSumOfNumbers() {
+  public void addNumbersMidTextReturnSumOfNumbers() {
     double result = calculator.add("1 2 asd 2");
     assertEquals(5, result, 0);
   }
 
   @Test
-  public void testAddNumbersEndTextReturnSumOfNumbers() {
+  public void addNumbersEndTextReturnSumOfNumbers() {
     double result = calculator.add("1 2 3 asd");
     assertEquals(6, result, 0);
   }
 
   @Test
-  public void testAddTextNewLinesNumbersReturnSumOfNumbers() {
-    double result = calculator.add("import java.util.regex.Pattern;\n" +
-            "import java.util.regex.Matcher;\n" +
-            "\n" +
-            "public class MatcherDemo {\n" +
-            "\n" +
-            "    private static final String REGEX =\n" +
-            "        \"\\\\bdog\\\\b\";\n" +
-            "    private static final String INPUT =\n" +
-            "        \"dog dog dog doggie dogg\";\n" +
-            "\n" +
-            "    public static void main(String[] args) {\n" +
-            "       Pattern p = Pattern.compile(REGEX);\n" +
-            "       //  get a matcher object\n" +
-            "       Matcher m = p.matcher(INPUT);\n" +
-            "       int count = 0;\n" +
-            "       while(m.find()) {\n" +
-            "           count++;\n" +
-            "           System.out.println(\"Match number \"\n" +
-            "                              + count);\n" +
-            "           System.out.println(\"start(): \"\n" +
-            "                              + m.start());\n" +
-            "           System.out.println(\"end(): \"\n" +
-            "                              + m.end());\n" +
-            "      }\n" +
-            "   }\n" +
-            "}\n" +
-            "\n" +
-            "OUTPUT:\n" +
-            "\n" +
-            "Match number 1\n" +
-            "start(): 0\n" +
-            "end(): 3\n" +
-            "Match number 2\n" +
-            "start(): 4\n" +
-            "end(): 7\n" +
-            "Match number 3\n" +
-            "start(): 8\n" +
-            "end(): 11\n");
-    assertEquals(39, result, 0);
+  public void addTextNewLinesNumbersReturnSumOfNumbers() {
+    double result = calculator.add("aaa\n34\nbbb4ccc\n11");
+    assertEquals(49, result, 0);
   }
 }

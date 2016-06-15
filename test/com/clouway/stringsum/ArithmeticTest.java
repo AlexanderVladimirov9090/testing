@@ -1,6 +1,5 @@
 package com.clouway.stringsum;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;

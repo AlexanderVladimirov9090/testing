@@ -1,0 +1,17 @@
+addStock:
+addStock happyPath. - add and return object - done
+addStock 0.0 prize. - add and return object - done
+addStock 0 maxQuantity. return null.-done
+addStock 0 quantity. return null-done
+
+sellStock:
+sellStock happyPath. - decrease quantity and return cost. - done
+sellStock where Asked quantity is 0, don`t decrease quantity return 0 cost. - done
+sellStock where asked quantity is more than hasQuantity, don`t sell return 0 cost.- done
+
+getCatalogueByPrice:
+getCatalogueByPrice happyPath. - return catalogue by price.- done
+getCatalogueByPrice empty catalogue- return empty catalogue - done
+
+
+

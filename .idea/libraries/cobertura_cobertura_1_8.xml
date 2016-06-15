@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="cobertura:cobertura:1.8" type="repository">
+    <properties maven-id="cobertura:cobertura:1.8" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/cobertura-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/oro-2.0.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/asm-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cobertura-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/oro-2.0.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/asm-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

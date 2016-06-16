@@ -11,5 +11,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" scope="TEST" name="junit:junit:4.12" level="application" />
+    <orderEntry type="library" exported="" name="cobertura:cobertura:1.8" level="project" />
   </component>
 </module>

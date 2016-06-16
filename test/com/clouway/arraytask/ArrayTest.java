@@ -15,7 +15,7 @@ public class ArrayTest {
   private Array array;
   private int[] emptyArray = {};
   private int[] arrOneElement = {0};
-  private int[] arrMoreThanOne = {1, 2, 3, 4, 5, 6, 7};
+  private ;
 
   @Before
   public void initialize() {
@@ -33,20 +33,20 @@ public class ArrayTest {
   }
 
   @Test
-  public void printArray() throws Exception {
+  public void printArrayEmptyArray() throws Exception {
     array.printArray(emptyArray);
   }
 
   @Test
   public void getMinOneElementArray() {
-    int result = array.getMinElement(arrOneElement);
-    assertEquals(0, result, 0);
+    int result =
+    assertEquals(0, array.getMinElement(arrOneElement), 0);
   }
 
   @Test
   public void getMaxOneElementArray() {
-    int result = array.getMinElement(arrOneElement);
-    assertEquals(0, result, 0);
+
+    assertEquals(0, array.getMinElement(arrOneElement), 0);
   }
 
   @Test
@@ -57,13 +57,18 @@ public class ArrayTest {
 
   @Test
   public void getMinMoreThanOneElementArray(){
-    int result = array.getMinElement(arrMoreThanOne);
-    assertEquals(1,result,0);
+
+    assertEquals(1,array.getMinElement(new int[] {1, 2, 3, 4, 5, 6, 7}),0);
   }
 
   @Test
   public void getMaxMoreThanOneElementArray(){
-    int result = array.getMaxElement(arrMoreThanOne);
-    assertEquals(7, result,0);
+
+    assertEquals(7, array.getMaxElement(new int[] {1, 2, 3, 4, 5, 6, 7}),0);
+  }
+  @Test
+  public void printArrayMoreThanOneElementArray(){
+    int[] sameArray = array.printArray(new int[] {1, 2, 3, 4, 5, 6, 7});
+    assertArrayEquals(sameArray,new int[]{1,2,3,4,5,6,7},0);
   }
 }

@@ -28,14 +28,19 @@ public class Array {
    * @param array passed array.
    * @return maximum element.
    */
-  public int getMaxElement(int[] array){
+  public int getMaxElement(int[] array)throws NullPointerException{
     int maxElement = array[0];
-    for (int i = 1; i < array.length; i++) {
-      if (array[i] > maxElement) {
-        maxElement = array[i];
+    if(!(array.equals(null))) {
+      for (int i = 1; i < array.length; i++) {
+        if (array[i] > maxElement) {
+          maxElement = array[i];
+        }
       }
+      return maxElement;
     }
-    return maxElement;
+    else {
+      throw new NullPointerException();
+    }
   }
 
   /**

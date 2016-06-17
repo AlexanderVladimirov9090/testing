@@ -3,6 +3,9 @@ package com.clouway.arraytask;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.*;
 
 /**
@@ -34,27 +37,29 @@ public class ArrayTest {
 
   @Test
   public void printArrayEmptyArray() {
-    int[] thisEmptyArra = array.printArray(emptyArray);
-    for (int each : thisEmptyArra) {
-      assertEquals(null, each, 0);
+    int[] thisEmptyArray = array.printArray(emptyArray);
+    for (int each : thisEmptyArray) {
+      assertThat(0, is(equalTo(each)));
     }
   }
 
   @Test
   public void getMinOneElementArray() {
-    assertEquals(0, array.getMinElement(arrOneElement), 0);
+
+    assertThat(0, is(equalTo(array.getMinElement(arrOneElement))));
   }
 
   @Test
   public void getMaxOneElementArray() {
 
-    assertEquals(0, array.getMinElement(arrOneElement), 0);
+    assertThat(0, is(equalTo(array.getMaxElement(arrOneElement))));
   }
 
   @Test
   public void printArrayOneElementArray() {
     int[] sameArray = array.printArray(arrOneElement);
-    assertArrayEquals(arrOneElement, sameArray);
+
+    assertThat(arrOneElement, is(equalTo(sameArray)));
   }
 
   @Test
@@ -73,6 +78,7 @@ public class ArrayTest {
   public void printArrayMoreThanOneElementArray() {
     int[] sameArray = array.printArray(new int[]{1, 2, 3, 4, 5, 6, 7});
     int[] thisArray = {1, 2, 3, 4, 5, 6, 7};
-    assertArrayEquals(sameArray, thisArray);
+
+    assertThat(sameArray, is(equalTo(thisArray)));
   }
 }

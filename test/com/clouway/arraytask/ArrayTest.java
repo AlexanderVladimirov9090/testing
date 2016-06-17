@@ -65,13 +65,14 @@ public class ArrayTest {
   @Test
   public void getMinMoreThanOneElementArray() {
 
-    assertEquals(1, array.getMinElement(new int[]{1, 2, 3, 4, 5, 6, 7}), 0);
+    assertThat(1, is(equalTo(array.getMinElement(new int[]{1, 2, 3, 4, 5, 6, 7}))));
   }
 
   @Test
   public void getMaxMoreThanOneElementArray() {
 
-    assertEquals(7, array.getMaxElement(new int[]{1, 2, 3, 4, 5, 6, 7}), 0);
+    assertThat(7, is(equalTo(array.getMinElement(new int[]{1, 2, 3, 4, 5, 6, 7}))));
+
   }
 
   @Test

@@ -48,7 +48,9 @@ public class Array {
    * @param array passed array.
    * @return array.
    */
-  public int[] printArray(int[] array) {
-    return array;
+  public void printArray(int[] array) {
+    for (int each:array) {
+      System.out.println(each);
+    }
   }
 }

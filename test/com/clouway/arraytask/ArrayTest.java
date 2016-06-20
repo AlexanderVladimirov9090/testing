@@ -3,6 +3,13 @@ package com.clouway.arraytask;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -37,10 +44,14 @@ public class ArrayTest {
 
   @Test
   public void printArrayEmptyArray() {
-    int[] thisEmptyArray = array.printArray(emptyArray);
-    for (int each : thisEmptyArray) {
-      assertThat(0, is(equalTo(each)));
-    }
+    PrintStream originalOutput = System.out;
+    OutputStream outStream = new ByteArrayOutputStream();
+    PrintStream prStream = new PrintStream(outStream);
+    System.setOut(prStream);
+    array.printArray(emptyArray);
+
+    assertThat("",is(equalTo(outStream.toString())));
+  System.setOut(originalOutput);
   }
 
   @Test
@@ -57,9 +68,14 @@ public class ArrayTest {
 
   @Test
   public void printArrayOneElementArray() {
-    int[] sameArray = array.printArray(arrOneElement);
+    PrintStream originalOutput = System.out;
+    OutputStream outStream = new ByteArrayOutputStream();
+    PrintStream prStream = new PrintStream(outStream);
+    System.setOut(prStream);
+    array.printArray(arrOneElement);
 
-    assertThat(arrOneElement, is(equalTo(sameArray)));
+    assertThat("0\n",is(equalTo(outStream.toString())));
+    System.setOut(originalOutput);
   }
 
   @Test
@@ -71,15 +87,19 @@ public class ArrayTest {
   @Test
   public void getMaxMoreThanOneElementArray() {
 
-    assertThat(7, is(equalTo(array.getMinElement(new int[]{1, 2, 3, 4, 5, 6, 7}))));
+    assertThat(7, is(equalTo(array.getMaxElement(new int[]{1, 2, 3, 4, 5, 6, 7}))));
 
   }
 
   @Test
   public void printArrayMoreThanOneElementArray() {
-    int[] sameArray = array.printArray(new int[]{1, 2, 3, 4, 5, 6, 7});
-    int[] thisArray = {1, 2, 3, 4, 5, 6, 7};
+    PrintStream originalOutput = System.out;
+    OutputStream outStream = new ByteArrayOutputStream();
+    PrintStream prStream = new PrintStream(outStream);
+    System.setOut(prStream);
+    array.printArray(new int[]{1, 2, 3, 4, 5, 6, 7});
 
-    assertThat(sameArray, is(equalTo(thisArray)));
+    assertThat("1\n2\n3\n4\n5\n6\n7\n",is(equalTo(outStream.toString())));
+    System.setOut(originalOutput);
   }
 }

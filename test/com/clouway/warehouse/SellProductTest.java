@@ -3,17 +3,10 @@ package com.clouway.warehouse;
 import org.junit.Test;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-
 
 /**
  * Created by clouway on 28.06.16.
@@ -170,9 +163,9 @@ public class SellProductTest {
     warehouse.addProduct("SeaFood", 3.3, 1, 4);
     warehouse.addProduct("WhatIsThisProduct", 3.4, 1, 4);
     warehouse.addProduct("Doner", 4.5, 2, 4);
-    assertThat(warehouse.getCatalogueByPrice().get(0).product.name(), is(equalTo("SeaFood")));
-    assertThat(warehouse.getCatalogueByPrice().get(1).product.name(), is(equalTo("WhatIsThisProduct")));
-    assertThat(warehouse.getCatalogueByPrice().get(2).product.name(), is(equalTo("Doner")));
+    assertThat(warehouse.getCatalogueByPrice().get(0).getNameOfProduct(), is(equalTo("SeaFood")));
+    assertThat(warehouse.getCatalogueByPrice().get(1).getNameOfProduct(), is(equalTo("WhatIsThisProduct")));
+    assertThat(warehouse.getCatalogueByPrice().get(2).getNameOfProduct(), is(equalTo("Doner")));
   }
 
   @Test
@@ -187,194 +180,11 @@ public class SellProductTest {
     warehouse.addProduct("Food", 4.4, 3, 3);
     warehouse.addProduct("NotFood", 4.4, 3, 3);
     warehouse.addProduct("ForgottenFood", 3.3, 3, 3);
-    assertThat(warehouse.getCatalogueByPrice().get(0).product.name(), is(equalTo("ForgottenFood")));
-    assertThat(warehouse.getCatalogueByPrice().get(1).product.name(), is(equalTo("Food")));
-    assertThat(warehouse.getCatalogueByPrice().get(2).product.name(), is(equalTo("NotFood")));
+    assertThat(warehouse.getCatalogueByPrice().get(0).getNameOfProduct(), is(equalTo("ForgottenFood")));
+    assertThat(warehouse.getCatalogueByPrice().get(1).getNameOfProduct(), is(equalTo("Food")));
+    assertThat(warehouse.getCatalogueByPrice().get(2).getNameOfProduct(), is(equalTo("NotFood")));
   }
 
 
-  private class Warehouse {
-    private List<ContainerProduct> catalogue = new ArrayList<>();
-    private Map<String, Integer> storage = new LinkedHashMap<>();
-
-    public int sellProduct(String name, int quantityWant) throws ZeroOrNegativeQuantityException {
-      if (quantityWant <= 0) {
-        throw new ZeroOrNegativeQuantityException();
-      }
-      for (ContainerProduct each : catalogue) {
-        if (each.product.name().equals(name)) {
-          return calculateRemainingValue(quantityWant, each);
-        }
-      }
-      return 0;
-    }
-
-    public Product addProduct(String name, Double price, Integer quantity, Integer maxQuantity) throws QuantityLimitExceed, NegativeNumberException {
-      checkForNull(name, price, maxQuantity);
-      checkForNegativity(price, quantity, maxQuantity);
-      productNotInStorage(name, maxQuantity);
-      checkLimitExceeded(name, quantity);
-
-      for (ContainerProduct each : catalogue) {
-        if (each.product.name().equals(name)) {
-          each.updateQuantity(new Quantity(quantity + each.quantity.getQuantity()));
-        }
-      }
-      ContainerProduct container = new ContainerProduct(new Product(name), new Price(price), new Quantity(quantity));
-      catalogue.add(container);
-
-      return container.product;
-    }
-
-    public Integer addQuantity(String name, Integer quantity) throws QuantityLimitExceed, NegativeNumberException {
-      checkForNull(quantity);
-
-      for (ContainerProduct each : catalogue) {
-        if (each.product.name().equals(name)) {
-          checkLimitExceeded(name, each);
-          each.updateQuantity(new Quantity(each.quantity.getQuantity() + quantity));
-
-          return each.quantity.getQuantity();
-        }
-      }
-
-      return 0;
-    }
-
-    private void checkForNull(Integer quantity) {
-      if (quantity == null) {
-        throw new NullPointerException();
-      }
-    }
-
-    private void checkLimitExceeded(String name, ContainerProduct each) throws QuantityLimitExceed {
-      if (each.quantity.getQuantity() == storage.get(name)) {
-        throw new QuantityLimitExceed();
-      }
-    }
-
-
-    public List<ContainerProduct> getCatalogueByPrice() {
-      List<ContainerProduct> unsortedCatalogue = catalogue;
-      Collections.sort(unsortedCatalogue, (product1, product2) -> Double.compare(product1.getPrice(), product2.getPrice()));
-      return unsortedCatalogue;
-    }
-
-    private void checkLimitExceeded(String name, Integer quantity) throws QuantityLimitExceed {
-      if (storage.get(name) < quantity) {
-        throw new QuantityLimitExceed();
-      }
-    }
-
-    private void productNotInStorage(String name, Integer maxQuantity) {
-      if (!storage.containsKey(name)) {
-        updateStorage(name, maxQuantity);
-      }
-    }
-
-    private void checkForNegativity(Double price, Integer quantity, Integer maxQuantity) throws NegativeNumberException {
-      if (price < 0 || quantity < 0 || maxQuantity < 0) {
-        throw new NegativeNumberException();
-      }
-    }
-
-    private void checkForNull(String name, Double price, Integer maxQuantity) {
-      if (name.isEmpty() || price.isNaN() || maxQuantity == 0) {
-        throw new NullPointerException();
-      }
-    }
-
-    private int calculateRemainingValue(int quantityWant, ContainerProduct each) {
-      if (each.quantity.getQuantity() < quantityWant) {
-        return each.quantity.getQuantity();
-      }
-      each.updateQuantity(new Quantity(each.quantity.getQuantity() - quantityWant));
-      return each.quantity.getQuantity();
-    }
-
-    private void updateStorage(String name, Integer maxQuantity) {
-      if (!(name.isEmpty() || maxQuantity <= 0)) {
-        storage.put(name, maxQuantity);
-      }
-    }
-
-
-    private class ContainerProduct {
-      private final Product product;
-      private final Price price;
-      private Quantity quantity;
-
-      public ContainerProduct(Product product, Price price, Quantity quantity) {
-        this.product = product;
-        this.price = price;
-        this.quantity = quantity;
-      }
-
-      public void updateQuantity(Quantity quantity) {
-        this.quantity = quantity;
-      }
-
-      public double getPrice() {
-        return price.getPrice();
-      }
-
-    }
-  }
-
-  private class Product {
-    private final String name;
-
-    public Product(String name) {
-      this.name = name;
-    }
-
-
-    public String name() {
-      return name;
-    }
-  }
-
-  private class Price {
-    private final Double value;
-
-    public Price(Double value) {
-      this.value = value;
-    }
-
-    public Double getPrice() {
-      return value;
-
-    }
-  }
-
-  private class Quantity {
-    private final int quantity;
-
-    public Quantity(int quantity) {
-      this.quantity = quantity;
-    }
-
-    public int getQuantity() {
-      return quantity;
-    }
-  }
-
-  private class QuantityLimitExceed extends Exception {
-    public QuantityLimitExceed() {
-      super("Quantity exceed");
-    }
-  }
-
-  private class ZeroOrNegativeQuantityException extends Exception {
-    public ZeroOrNegativeQuantityException() {
-      super("Can`t sell zero or negative quantity from product");
-    }
-  }
-
-  private class NegativeNumberException extends Exception {
-    public NegativeNumberException() {
-      super("Can`t be negative number.");
-    }
-  }
 }
 

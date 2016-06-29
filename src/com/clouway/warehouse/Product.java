@@ -1,19 +1,20 @@
 package com.clouway.warehouse;
 
 /**
- * Created by clouway on 28.06.16.
+ * Created by clouway on 29.06.16.
  *
  * @author alexandervladimirov1902@gmail.com
  *         (Alexander Vladimirov)
  */
 class Product {
-  private final String description;
+  private final String name;
 
-  public Product(String description) {
-    this.description = description;
+  public Product(String name) {
+    this.name = name;
   }
 
-  public String getDescription() {
-    return description;
+
+  public String name() {
+    return name;
   }
 }

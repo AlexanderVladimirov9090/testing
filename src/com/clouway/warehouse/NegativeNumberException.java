@@ -6,15 +6,8 @@ package com.clouway.warehouse;
  * @author alexandervladimirov1902@gmail.com
  *         (Alexander Vladimirov)
  */
-class Price {
-  private final Double value;
-
-  public Price(Double value) {
-    this.value = value;
-  }
-
-  public Double getPrice() {
-    return value;
-
+class NegativeNumberException extends Exception {
+  public NegativeNumberException() {
+    super("Can`t be negative number.");
   }
 }

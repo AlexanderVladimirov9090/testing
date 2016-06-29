@@ -13,7 +13,10 @@ class Product {
     this.name = name;
   }
 
-
+  /**
+   * Returns name of the product.
+   * @return name of product.
+   */
   public String name() {
     return name;
   }

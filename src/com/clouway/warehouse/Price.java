@@ -13,6 +13,11 @@ class Price {
     this.value = value;
   }
 
+  /**
+   * Returns value of price.
+   *
+   * @return value of price.
+   */
   public Double getPrice() {
     return value;
 

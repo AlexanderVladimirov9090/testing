@@ -13,6 +13,11 @@ class Quantity {
     this.quantity = quantity;
   }
 
+  /**
+   * Returns value of the quantity.
+   *
+   * @return value of quantity.
+   */
   public int getQuantity() {
     return quantity;
   }

@@ -6,6 +6,7 @@ package com.clouway.warehouse;
  * @author alexandervladimirov1902@gmail.com
  *         (Alexander Vladimirov)
  */
+
 class ZeroOrNegativeQuantityException extends Exception {
   public ZeroOrNegativeQuantityException() {
     super("Can`t sell zero or negative quantity from product");
